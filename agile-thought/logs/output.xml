@@ -1,0 +1,1320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.3 on darwin)" generated="20230804 17:43:49.638" rpa="false" schemaversion="3">
+<suite id="s1" name="First" source="/Users/pedronascimento/Documents/projects/agile-thought/tests/first.robot">
+<test id="s1-t1" name="Validate all menu items are present" line="10">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:43:50.169" level="INFO">{"browser": "chromium", "headless": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "deprecated_pos_args": [], "tracesDir": "/Users/pedronascimento/Documents/projects/agile-thought/logs/browser/traces/bd5b53e4-59ae-4140-919d-ad7de5b356bc"}</msg>
+<msg timestamp="20230804 17:43:50.794" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"deprecated_pos_args":[],"tracesDir":"/Users/pedronascimento/Documents/projects/agile-thought/logs/browser/traces/bd5b53e4-59ae-4140-919d-ad7de5b356bc"}</msg>
+<status status="PASS" starttime="20230804 17:43:50.169" endtime="20230804 17:43:50.794"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:43:54.938" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:43:54.938" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:43:50.794" endtime="20230804 17:43:54.938"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:43:55.003" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:43:54.939" endtime="20230804 17:43:55.003"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:50.168" endtime="20230804 17:43:55.003"/>
+</kw>
+<kw name="Get fixture" library="base">
+<var>${data}</var>
+<arg>menu</arg>
+<arg>header</arg>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${data}</var>
+<arg>${EXECDIR}/resources/fixtures/${file_name}.json</arg>
+<arg>encoding=utf-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20230804 17:43:55.004" level="INFO">${data} = {'header': {'items': ['Microsoft 365', 'Windows', 'Surface', 'Xbox', 'Deals', 'Small Business', 'Support']}}</msg>
+<status status="PASS" starttime="20230804 17:43:55.003" endtime="20230804 17:43:55.004"/>
+</kw>
+<msg timestamp="20230804 17:43:55.004" level="INFO">${data} = {'items': ['Microsoft 365', 'Windows', 'Surface', 'Xbox', 'Deals', 'Small Business', 'Support']}</msg>
+<status status="PASS" starttime="20230804 17:43:55.003" endtime="20230804 17:43:55.004"/>
+</kw>
+<kw name="Header should have all menu item" library="Header">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:43:55.005" level="INFO">${element} = css=nav[id="uhf-g-nav"]</msg>
+<status status="PASS" starttime="20230804 17:43:55.005" endtime="20230804 17:43:55.005"/>
+</kw>
+<for flavor="IN">
+<var>${item}</var>
+<value>@{header}[items]</value>
+<iter>
+<var name="${item}">Microsoft 365</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.020" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Microsoft 365 at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.005" endtime="20230804 17:43:55.020"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.035" level="INFO">Text: 'Microsoft 365'</msg>
+<status status="PASS" starttime="20230804 17:43:55.020" endtime="20230804 17:43:55.035"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.005" endtime="20230804 17:43:55.035"/>
+</iter>
+<iter>
+<var name="${item}">Windows</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.039" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.036" endtime="20230804 17:43:55.039"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.045" level="INFO">Text: 'Windows'</msg>
+<status status="PASS" starttime="20230804 17:43:55.039" endtime="20230804 17:43:55.045"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.035" endtime="20230804 17:43:55.045"/>
+</iter>
+<iter>
+<var name="${item}">Surface</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.050" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Surface at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.045" endtime="20230804 17:43:55.050"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.058" level="INFO">Text: 'Surface'</msg>
+<status status="PASS" starttime="20230804 17:43:55.050" endtime="20230804 17:43:55.058"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.045" endtime="20230804 17:43:55.058"/>
+</iter>
+<iter>
+<var name="${item}">Xbox</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.061" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Xbox at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.058" endtime="20230804 17:43:55.061"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.067" level="INFO">Text: 'Xbox'</msg>
+<status status="PASS" starttime="20230804 17:43:55.061" endtime="20230804 17:43:55.067"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.058" endtime="20230804 17:43:55.067"/>
+</iter>
+<iter>
+<var name="${item}">Deals</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.069" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Deals at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.067" endtime="20230804 17:43:55.070"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.074" level="INFO">Text: 'Deals'</msg>
+<status status="PASS" starttime="20230804 17:43:55.070" endtime="20230804 17:43:55.074"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.067" endtime="20230804 17:43:55.074"/>
+</iter>
+<iter>
+<var name="${item}">Small Business</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.077" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Small Business at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.074" endtime="20230804 17:43:55.077"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.083" level="INFO">Text: 'Small Business'</msg>
+<status status="PASS" starttime="20230804 17:43:55.077" endtime="20230804 17:43:55.083"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.074" endtime="20230804 17:43:55.083"/>
+</iter>
+<iter>
+<var name="${item}">Support</var>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:55.085" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Support at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:55.083" endtime="20230804 17:43:55.086"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element} &gt;&gt; text=${item}</arg>
+<arg>equal</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:43:55.090" level="INFO">Text: 'Support'</msg>
+<status status="PASS" starttime="20230804 17:43:55.086" endtime="20230804 17:43:55.091"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.083" endtime="20230804 17:43:55.091"/>
+</iter>
+<status status="PASS" starttime="20230804 17:43:55.005" endtime="20230804 17:43:55.091"/>
+</for>
+<status status="PASS" starttime="20230804 17:43:55.004" endtime="20230804 17:43:55.091"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:43:55.306" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-1.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-1.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:43:55.091" endtime="20230804 17:43:55.306"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:50.167" endtime="20230804 17:43:55.307"/>
+</test>
+<test id="s1-t2" name="Validate open dropdown on About Windows Menu" line="16">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:43:55.371" level="INFO">Switching browser to browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<msg timestamp="20230804 17:43:55.372" level="INFO">Successfully changed active browser</msg>
+<msg timestamp="20230804 17:43:55.372" level="INFO">Reusing existing browser with id: browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<status status="PASS" starttime="20230804 17:43:55.371" endtime="20230804 17:43:55.372"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:43:58.002" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:43:58.002" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:43:55.373" endtime="20230804 17:43:58.002"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:43:58.062" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:43:58.002" endtime="20230804 17:43:58.062"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.371" endtime="20230804 17:43:58.062"/>
+</kw>
+<kw name="Access menu item page" library="Header">
+<arg>Windows</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"] &gt;&gt; text=${item}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:43:58.062" level="INFO">${element} = css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows</msg>
+<status status="PASS" starttime="20230804 17:43:58.062" endtime="20230804 17:43:58.062"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:43:58.076" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:43:58.063" endtime="20230804 17:43:58.076"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:43:58.076" endtime="20230804 17:43:59.698"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:58.062" endtime="20230804 17:43:59.699"/>
+</kw>
+<kw name="User should be on Windows page" library="windowsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>id=uhfCatLogo</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:43:59.699" level="INFO">${element} = id=uhfCatLogo</msg>
+<status status="PASS" starttime="20230804 17:43:59.699" endtime="20230804 17:43:59.699"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element}</arg>
+<arg>equal</arg>
+<arg>Windows</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:00.513" level="INFO">Text: 'Windows'</msg>
+<status status="PASS" starttime="20230804 17:43:59.699" endtime="20230804 17:44:00.513"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:59.699" endtime="20230804 17:44:00.513"/>
+</kw>
+<kw name="Open dropdown About Windows" library="windowsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>id=c-shellmenu_56</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:00.513" level="INFO">${element} = id=c-shellmenu_56</msg>
+<status status="PASS" starttime="20230804 17:44:00.513" endtime="20230804 17:44:00.513"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:00.513" endtime="20230804 17:44:00.559"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:00.513" endtime="20230804 17:44:00.559"/>
+</kw>
+<kw name="Take Screenshot" library="Browser">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:00.991" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-2.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-2.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:00.559" endtime="20230804 17:44:00.991"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:01.427" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-3.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-3.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:00.992" endtime="20230804 17:44:01.428"/>
+</kw>
+<status status="PASS" starttime="20230804 17:43:55.370" endtime="20230804 17:44:01.428"/>
+</test>
+<test id="s1-t3" name="Validate feature search on Windows Page" line="23">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:44:01.469" level="INFO">Switching browser to browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<msg timestamp="20230804 17:44:01.470" level="INFO">Successfully changed active browser</msg>
+<msg timestamp="20230804 17:44:01.470" level="INFO">Reusing existing browser with id: browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<status status="PASS" starttime="20230804 17:44:01.469" endtime="20230804 17:44:01.470"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:44:03.884" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:44:03.884" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:44:01.470" endtime="20230804 17:44:03.884"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:44:03.937" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:44:03.884" endtime="20230804 17:44:03.937"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:01.469" endtime="20230804 17:44:03.937"/>
+</kw>
+<kw name="Access menu item page" library="Header">
+<arg>Windows</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"] &gt;&gt; text=${item}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:03.938" level="INFO">${element} = css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows</msg>
+<status status="PASS" starttime="20230804 17:44:03.938" endtime="20230804 17:44:03.938"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:03.955" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:03.938" endtime="20230804 17:44:03.955"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:03.955" endtime="20230804 17:44:04.821"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:03.937" endtime="20230804 17:44:04.821"/>
+</kw>
+<kw name="Do search" library="Search">
+<arg>Visual Studio1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_button}</var>
+<arg>id=search</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:04.821" level="INFO">${search_button} = id=search</msg>
+<status status="PASS" starttime="20230804 17:44:04.821" endtime="20230804 17:44:04.821"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_element}</var>
+<arg>id=cli_shellHeaderSearchInput</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:04.822" level="INFO">${search_element} = id=cli_shellHeaderSearchInput</msg>
+<status status="PASS" starttime="20230804 17:44:04.822" endtime="20230804 17:44:04.822"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${search_button}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:04.822" endtime="20230804 17:44:05.443"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${search_element}</arg>
+<arg>${search}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:05.443" level="INFO">Fills the text 'Visual Studio1' in the given field.</msg>
+<status status="PASS" starttime="20230804 17:44:05.443" endtime="20230804 17:44:05.455"/>
+</kw>
+<kw name="Press Keys" library="Browser">
+<arg>${search_element}</arg>
+<arg>Backspace</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given key combination into element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:05.455" endtime="20230804 17:44:05.462"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:04.821" endtime="20230804 17:44:05.462"/>
+</kw>
+<kw name="Select searched product by title" library="Search">
+<arg>Visual Studio Enterprise Subscription</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>h1[class="h2"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:05.462" level="INFO">${element} = h1[class="h2"]</msg>
+<status status="PASS" starttime="20230804 17:44:05.462" endtime="20230804 17:44:05.462"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>css=a[aria-label*="${item}"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:05.462" endtime="20230804 17:44:08.968"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:09.209" level="INFO">Waited for Element with selector h1[class="h2"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:08.968" endtime="20230804 17:44:09.209"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element}</arg>
+<arg>contains</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:09.266" level="INFO">Text: 'Visual Studio Enterprise Subscription (New)'</msg>
+<status status="PASS" starttime="20230804 17:44:09.209" endtime="20230804 17:44:09.266"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:05.462" endtime="20230804 17:44:09.266"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:09.854" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-4.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-4.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:09.267" endtime="20230804 17:44:09.855"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:01.468" endtime="20230804 17:44:09.855"/>
+</test>
+<test id="s1-t4" name="Validate different prices on details page" line="30">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:44:09.936" level="INFO">Switching browser to browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<msg timestamp="20230804 17:44:09.937" level="INFO">Successfully changed active browser</msg>
+<msg timestamp="20230804 17:44:09.937" level="INFO">Reusing existing browser with id: browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<status status="PASS" starttime="20230804 17:44:09.935" endtime="20230804 17:44:09.938"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:44:13.290" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:44:13.291" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:44:09.938" endtime="20230804 17:44:13.291"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:44:13.346" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:44:13.291" endtime="20230804 17:44:13.346"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:09.935" endtime="20230804 17:44:13.346"/>
+</kw>
+<kw name="Access menu item page" library="Header">
+<arg>Windows</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"] &gt;&gt; text=${item}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:13.347" level="INFO">${element} = css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows</msg>
+<status status="PASS" starttime="20230804 17:44:13.347" endtime="20230804 17:44:13.347"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:13.362" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:13.347" endtime="20230804 17:44:13.362"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:13.362" endtime="20230804 17:44:14.182"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:13.346" endtime="20230804 17:44:14.182"/>
+</kw>
+<kw name="Do search" library="Search">
+<arg>Visual Studio1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_button}</var>
+<arg>id=search</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:14.182" level="INFO">${search_button} = id=search</msg>
+<status status="PASS" starttime="20230804 17:44:14.182" endtime="20230804 17:44:14.182"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_element}</var>
+<arg>id=cli_shellHeaderSearchInput</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:14.183" level="INFO">${search_element} = id=cli_shellHeaderSearchInput</msg>
+<status status="PASS" starttime="20230804 17:44:14.183" endtime="20230804 17:44:14.183"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${search_button}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:14.183" endtime="20230804 17:44:15.134"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${search_element}</arg>
+<arg>${search}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:15.134" level="INFO">Fills the text 'Visual Studio1' in the given field.</msg>
+<status status="PASS" starttime="20230804 17:44:15.134" endtime="20230804 17:44:15.139"/>
+</kw>
+<kw name="Press Keys" library="Browser">
+<arg>${search_element}</arg>
+<arg>Backspace</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given key combination into element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:15.139" endtime="20230804 17:44:15.147"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:14.182" endtime="20230804 17:44:15.147"/>
+</kw>
+<kw name="Select searched product by title" library="Search">
+<arg>Visual Studio Enterprise Subscription</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>h1[class="h2"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:15.148" level="INFO">${element} = h1[class="h2"]</msg>
+<status status="PASS" starttime="20230804 17:44:15.147" endtime="20230804 17:44:15.148"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>css=a[aria-label*="${item}"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:15.148" endtime="20230804 17:44:16.917"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:17.062" level="INFO">Waited for Element with selector h1[class="h2"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:16.917" endtime="20230804 17:44:17.062"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element}</arg>
+<arg>contains</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:17.073" level="INFO">Text: 'Visual Studio Enterprise Subscription (New)'</msg>
+<status status="PASS" starttime="20230804 17:44:17.062" endtime="20230804 17:44:17.073"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:15.147" endtime="20230804 17:44:17.073"/>
+</kw>
+<kw name="Set country US on modal" library="Modal">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>xpath=//button[text()="Stay in United States - English"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:17.073" level="INFO">${element} = xpath=//button[text()="Stay in United States - English"]</msg>
+<status status="PASS" starttime="20230804 17:44:17.073" endtime="20230804 17:44:17.073"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:18.371" level="INFO">Waited for Element with selector xpath=//button[text()="Stay in United States - English"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:17.073" endtime="20230804 17:44:18.372"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:18.372" endtime="20230804 17:44:18.522"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:17.073" endtime="20230804 17:44:18.522"/>
+</kw>
+<kw name="Compare different prices" library="detailsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${price_element}</var>
+<arg>css=p[data-automation-test-id=buy-box-pricing]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:18.523" level="INFO">${price_element} = css=p[data-automation-test-id=buy-box-pricing]</msg>
+<status status="PASS" starttime="20230804 17:44:18.522" endtime="20230804 17:44:18.523"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${first_price}</var>
+<arg>${price_element}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:18.533" level="INFO">Text: '$5,999.00'</msg>
+<msg timestamp="20230804 17:44:18.533" level="INFO">${first_price} = $5,999.00</msg>
+<status status="PASS" starttime="20230804 17:44:18.523" endtime="20230804 17:44:18.533"/>
+</kw>
+<kw name="Close modal" library="Modal">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=button[class="close"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:18.534" level="INFO">${element} = css=button[class="close"]</msg>
+<status status="PASS" starttime="20230804 17:44:18.534" endtime="20230804 17:44:18.534"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:21.861" level="INFO">Waited for Element with selector css=button[class="close"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:18.534" endtime="20230804 17:44:21.861"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:21.862" endtime="20230804 17:44:22.037"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:18.534" endtime="20230804 17:44:22.037"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${second_product}</var>
+<arg>xpath=//label[@for=0003]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:22.037" level="INFO">${second_product} = xpath=//label[@for=0003]</msg>
+<status status="PASS" starttime="20230804 17:44:22.037" endtime="20230804 17:44:22.037"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${second_product}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:22.037" endtime="20230804 17:44:22.420"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${second_price}</var>
+<arg>${price_element}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:22.428" level="INFO">Text: '$2,569.00'</msg>
+<msg timestamp="20230804 17:44:22.428" level="INFO">${second_price} = $2,569.00</msg>
+<status status="PASS" starttime="20230804 17:44:22.420" endtime="20230804 17:44:22.428"/>
+</kw>
+<kw name="Should Not Be Equal" library="BuiltIn">
+<arg>${first_price}</arg>
+<arg>${second_price}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" starttime="20230804 17:44:22.428" endtime="20230804 17:44:22.428"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:18.522" endtime="20230804 17:44:22.429"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:22.538" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-5.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-5.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:22.429" endtime="20230804 17:44:22.538"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:09.933" endtime="20230804 17:44:22.538"/>
+</test>
+<test id="s1-t5" name="Validate same prices amounts on cart" line="39">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:44:22.578" level="INFO">Switching browser to browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<msg timestamp="20230804 17:44:22.579" level="INFO">Successfully changed active browser</msg>
+<msg timestamp="20230804 17:44:22.579" level="INFO">Reusing existing browser with id: browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<status status="PASS" starttime="20230804 17:44:22.578" endtime="20230804 17:44:22.579"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:44:25.135" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:44:25.135" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:44:22.579" endtime="20230804 17:44:25.136"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:44:25.188" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:44:25.136" endtime="20230804 17:44:25.189"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:22.578" endtime="20230804 17:44:25.189"/>
+</kw>
+<kw name="Access menu item page" library="Header">
+<arg>Windows</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"] &gt;&gt; text=${item}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:25.189" level="INFO">${element} = css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows</msg>
+<status status="PASS" starttime="20230804 17:44:25.189" endtime="20230804 17:44:25.189"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:25.203" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:25.190" endtime="20230804 17:44:25.203"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:25.203" endtime="20230804 17:44:25.646"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:25.189" endtime="20230804 17:44:25.646"/>
+</kw>
+<kw name="Do search" library="Search">
+<arg>Visual Studio1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_button}</var>
+<arg>id=search</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:25.647" level="INFO">${search_button} = id=search</msg>
+<status status="PASS" starttime="20230804 17:44:25.646" endtime="20230804 17:44:25.647"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_element}</var>
+<arg>id=cli_shellHeaderSearchInput</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:25.647" level="INFO">${search_element} = id=cli_shellHeaderSearchInput</msg>
+<status status="PASS" starttime="20230804 17:44:25.647" endtime="20230804 17:44:25.647"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${search_button}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:25.647" endtime="20230804 17:44:26.440"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${search_element}</arg>
+<arg>${search}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:26.441" level="INFO">Fills the text 'Visual Studio1' in the given field.</msg>
+<status status="PASS" starttime="20230804 17:44:26.440" endtime="20230804 17:44:26.446"/>
+</kw>
+<kw name="Press Keys" library="Browser">
+<arg>${search_element}</arg>
+<arg>Backspace</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given key combination into element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:26.446" endtime="20230804 17:44:26.457"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:25.646" endtime="20230804 17:44:26.457"/>
+</kw>
+<kw name="Select searched product by title" library="Search">
+<arg>Visual Studio Enterprise Subscription</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>h1[class="h2"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:26.458" level="INFO">${element} = h1[class="h2"]</msg>
+<status status="PASS" starttime="20230804 17:44:26.458" endtime="20230804 17:44:26.458"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>css=a[aria-label*="${item}"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:26.458" endtime="20230804 17:44:28.336"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:28.480" level="INFO">Waited for Element with selector h1[class="h2"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:28.336" endtime="20230804 17:44:28.480"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element}</arg>
+<arg>contains</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:28.561" level="INFO">Text: 'Visual Studio Enterprise Subscription (New)'</msg>
+<status status="PASS" starttime="20230804 17:44:28.480" endtime="20230804 17:44:28.561"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:26.457" endtime="20230804 17:44:28.561"/>
+</kw>
+<kw name="Set country US on modal" library="Modal">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>xpath=//button[text()="Stay in United States - English"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:28.561" level="INFO">${element} = xpath=//button[text()="Stay in United States - English"]</msg>
+<status status="PASS" starttime="20230804 17:44:28.561" endtime="20230804 17:44:28.561"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:29.870" level="INFO">Waited for Element with selector xpath=//button[text()="Stay in United States - English"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:28.561" endtime="20230804 17:44:29.870"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:29.871" endtime="20230804 17:44:30.025"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:28.561" endtime="20230804 17:44:30.026"/>
+</kw>
+<kw name="Add product to Cart" library="detailsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>id=buybox-cta-proper</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:30.026" level="INFO">${element} = id=buybox-cta-proper</msg>
+<status status="PASS" starttime="20230804 17:44:30.026" endtime="20230804 17:44:30.026"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:30.032" level="INFO">Waited for Element with selector id=buybox-cta-proper at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:30.026" endtime="20230804 17:44:30.032"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:30.032" endtime="20230804 17:44:30.404"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:30.026" endtime="20230804 17:44:30.405"/>
+</kw>
+<kw name="Compare same prices" library="cartPage">
+<kw name="Wait For Elements State" library="Browser">
+<arg>xpath=//h1[text()="Cart"]</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:36.404" level="INFO">Waited for Element with selector xpath=//h1[text()="Cart"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:30.405" endtime="20230804 17:44:36.405"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${individual_price_element}</var>
+<arg>xpath=//div[@class="item-price"]//span[@class="x-screen-reader"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:36.651" level="INFO">Text: '$5,999.00'</msg>
+<msg timestamp="20230804 17:44:36.651" level="INFO">${individual_price_element} = $5,999.00</msg>
+<status status="PASS" starttime="20230804 17:44:36.405" endtime="20230804 17:44:36.651"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${item_price_element}</var>
+<arg>xpath=//h2[text()="Order summary"]/..//span[@class="c-price"]//span[@itemprop="price"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:36.660" level="INFO">Text: '$5,999.00'</msg>
+<msg timestamp="20230804 17:44:36.660" level="INFO">${item_price_element} = $5,999.00</msg>
+<status status="PASS" starttime="20230804 17:44:36.651" endtime="20230804 17:44:36.660"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${total_price_element}</var>
+<arg>xpath=//strong[text()="Total*"]/../..//strong//span[@itemprop="price"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:36.664" level="INFO">Text: '$5,999.00'</msg>
+<msg timestamp="20230804 17:44:36.664" level="INFO">${total_price_element} = $5,999.00</msg>
+<status status="PASS" starttime="20230804 17:44:36.660" endtime="20230804 17:44:36.664"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${item_price_element}</arg>
+<arg>${total_price_element}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230804 17:44:36.664" endtime="20230804 17:44:36.664"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${individual_price_element}</arg>
+<arg>${total_price_element}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230804 17:44:36.664" endtime="20230804 17:44:36.664"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${item_price_element}</arg>
+<arg>${individual_price_element}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230804 17:44:36.664" endtime="20230804 17:44:36.664"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:30.405" endtime="20230804 17:44:36.664"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:36.774" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-6.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-6.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:36.665" endtime="20230804 17:44:36.774"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:22.577" endtime="20230804 17:44:36.774"/>
+</test>
+<test id="s1-t6" name="Validate total price alternate quantity" line="50">
+<kw name="Start Session" library="base" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20230804 17:44:36.827" level="INFO">Switching browser to browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<msg timestamp="20230804 17:44:36.828" level="INFO">Successfully changed active browser</msg>
+<msg timestamp="20230804 17:44:36.828" level="INFO">Reusing existing browser with id: browser=be833dc6-43c8-474c-8d6f-78fa0dc5c99d</msg>
+<status status="PASS" starttime="20230804 17:44:36.827" endtime="20230804 17:44:36.828"/>
+</kw>
+<kw name="New Page" library="Browser">
+<arg>${BASE_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20230804 17:44:39.004" level="INFO">Successfully initialized new page object and opened url: https://www.microsoft.com/en-us/</msg>
+<msg timestamp="20230804 17:44:39.004" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<status status="PASS" starttime="20230804 17:44:36.828" endtime="20230804 17:44:39.004"/>
+</kw>
+<kw name="Set Viewport Size" library="Browser">
+<arg>1920</arg>
+<arg>1080</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Sets current Pages viewport size to specified dimensions.</doc>
+<msg timestamp="20230804 17:44:39.059" level="INFO">Set viewport size to: [object Object]</msg>
+<status status="PASS" starttime="20230804 17:44:39.005" endtime="20230804 17:44:39.059"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:36.827" endtime="20230804 17:44:39.059"/>
+</kw>
+<kw name="Access menu item page" library="Header">
+<arg>Windows</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>css=nav[id="uhf-g-nav"] &gt;&gt; text=${item}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:39.060" level="INFO">${element} = css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows</msg>
+<status status="PASS" starttime="20230804 17:44:39.060" endtime="20230804 17:44:39.060"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:39.078" level="INFO">Waited for Element with selector css=nav[id="uhf-g-nav"] &gt;&gt; text=Windows at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:39.060" endtime="20230804 17:44:39.078"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:39.078" endtime="20230804 17:44:39.665"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:39.060" endtime="20230804 17:44:39.665"/>
+</kw>
+<kw name="Do search" library="Search">
+<arg>Visual Studio1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_button}</var>
+<arg>id=search</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:39.666" level="INFO">${search_button} = id=search</msg>
+<status status="PASS" starttime="20230804 17:44:39.666" endtime="20230804 17:44:39.666"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${search_element}</var>
+<arg>id=cli_shellHeaderSearchInput</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:39.666" level="INFO">${search_element} = id=cli_shellHeaderSearchInput</msg>
+<status status="PASS" starttime="20230804 17:44:39.666" endtime="20230804 17:44:39.666"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${search_button}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:39.666" endtime="20230804 17:44:40.437"/>
+</kw>
+<kw name="Fill Text" library="Browser">
+<arg>${search_element}</arg>
+<arg>${search}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:40.437" level="INFO">Fills the text 'Visual Studio1' in the given field.</msg>
+<status status="PASS" starttime="20230804 17:44:40.437" endtime="20230804 17:44:40.451"/>
+</kw>
+<kw name="Press Keys" library="Browser">
+<arg>${search_element}</arg>
+<arg>Backspace</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given key combination into element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:40.451" endtime="20230804 17:44:40.458"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:39.665" endtime="20230804 17:44:40.458"/>
+</kw>
+<kw name="Select searched product by title" library="Search">
+<arg>Visual Studio Enterprise Subscription</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>h1[class="h2"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:40.458" level="INFO">${element} = h1[class="h2"]</msg>
+<status status="PASS" starttime="20230804 17:44:40.458" endtime="20230804 17:44:40.459"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>css=a[aria-label*="${item}"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:40.459" endtime="20230804 17:44:43.013"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:43.220" level="INFO">Waited for Element with selector h1[class="h2"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:43.013" endtime="20230804 17:44:43.220"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${element}</arg>
+<arg>contains</arg>
+<arg>${item}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:43.229" level="INFO">Text: 'Visual Studio Enterprise Subscription (New)'</msg>
+<status status="PASS" starttime="20230804 17:44:43.220" endtime="20230804 17:44:43.229"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:40.458" endtime="20230804 17:44:43.230"/>
+</kw>
+<kw name="Set country US on modal" library="Modal">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>xpath=//button[text()="Stay in United States - English"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:43.230" level="INFO">${element} = xpath=//button[text()="Stay in United States - English"]</msg>
+<status status="PASS" starttime="20230804 17:44:43.230" endtime="20230804 17:44:43.230"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:44.630" level="INFO">Waited for Element with selector xpath=//button[text()="Stay in United States - English"] at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:43.230" endtime="20230804 17:44:44.630"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:44.630" endtime="20230804 17:44:44.670"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:43.230" endtime="20230804 17:44:44.671"/>
+</kw>
+<kw name="Add product to Cart" library="detailsPage">
+<kw name="Set Variable" library="BuiltIn">
+<var>${element}</var>
+<arg>id=buybox-cta-proper</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:44.671" level="INFO">${element} = id=buybox-cta-proper</msg>
+<status status="PASS" starttime="20230804 17:44:44.671" endtime="20230804 17:44:44.671"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:44.676" level="INFO">Waited for Element with selector id=buybox-cta-proper at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:44.672" endtime="20230804 17:44:44.677"/>
+</kw>
+<kw name="Click" library="Browser">
+<arg>${element}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:44.677" endtime="20230804 17:44:45.046"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:44.671" endtime="20230804 17:44:45.046"/>
+</kw>
+<kw name="Should update total price" library="cartPage">
+<arg>20</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${quatity_element}</var>
+<arg>xpath=//div[@class="itemQuantity--X4BIq29V"]//select</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230804 17:44:45.046" level="INFO">${quatity_element} = xpath=//div[@class="itemQuantity--X4BIq29V"]//select</msg>
+<status status="PASS" starttime="20230804 17:44:45.046" endtime="20230804 17:44:45.046"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${unit_price_element}</var>
+<arg>xpath=//div[@class="item-price"]//span[@class="x-screen-reader"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:48.697" level="INFO">Text: '$5,999.00'</msg>
+<msg timestamp="20230804 17:44:48.697" level="INFO">${unit_price_element} = $5,999.00</msg>
+<status status="PASS" starttime="20230804 17:44:45.046" endtime="20230804 17:44:48.697"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${unit_price}</var>
+<arg>${unit_price_element}</arg>
+<arg>$</arg>
+<arg>.00</arg>
+<arg>,</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20230804 17:44:48.697" level="INFO">${unit_price} = 5999</msg>
+<status status="PASS" starttime="20230804 17:44:48.697" endtime="20230804 17:44:48.697"/>
+</kw>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${unit_price_convert}</var>
+<arg>${unit_price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20230804 17:44:48.698" level="INFO">${unit_price_convert} = 5999.0</msg>
+<status status="PASS" starttime="20230804 17:44:48.698" endtime="20230804 17:44:48.698"/>
+</kw>
+<kw name="Wait For Elements State" library="Browser">
+<arg>${quatity_element}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<msg timestamp="20230804 17:44:48.701" level="INFO">Waited for Element with selector xpath=//div[@class="itemQuantity--X4BIq29V"]//select at state visible</msg>
+<status status="PASS" starttime="20230804 17:44:48.698" endtime="20230804 17:44:48.701"/>
+</kw>
+<kw name="Select Options By" library="Browser">
+<arg>${quatity_element}</arg>
+<arg>text</arg>
+<arg>${quantity}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Selects options from select element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:48.701" endtime="20230804 17:44:48.761"/>
+</kw>
+<kw name="Press Keys" library="Browser">
+<arg>${quatity_element}</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given key combination into element found by ``selector``.</doc>
+<status status="PASS" starttime="20230804 17:44:48.761" endtime="20230804 17:44:48.767"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230804 17:44:50.769" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230804 17:44:48.767" endtime="20230804 17:44:50.770"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<var>${total_price_element}</var>
+<arg>xpath=//strong[text()="Total*"]/../..//strong//span[@itemprop="price"]</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20230804 17:44:50.784" level="INFO">Text: '$119,980.00'</msg>
+<msg timestamp="20230804 17:44:50.784" level="INFO">${total_price_element} = $119,980.00</msg>
+<status status="PASS" starttime="20230804 17:44:50.771" endtime="20230804 17:44:50.784"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${total_price}</var>
+<arg>${total_price_element}</arg>
+<arg>$</arg>
+<arg>.00</arg>
+<arg>,</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20230804 17:44:50.785" level="INFO">${total_price} = 119980</msg>
+<status status="PASS" starttime="20230804 17:44:50.784" endtime="20230804 17:44:50.785"/>
+</kw>
+<kw name="Convert To Number" library="BuiltIn">
+<var>${total_price_convert}</var>
+<arg>${total_price}</arg>
+<doc>Converts the given item to a floating point number.</doc>
+<msg timestamp="20230804 17:44:50.785" level="INFO">${total_price_convert} = 119980.0</msg>
+<status status="PASS" starttime="20230804 17:44:50.785" endtime="20230804 17:44:50.785"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${total_amount}</var>
+<arg>${unit_price_convert}*${quantity}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230804 17:44:50.786" level="INFO">${total_amount} = 119980.0</msg>
+<status status="PASS" starttime="20230804 17:44:50.785" endtime="20230804 17:44:50.786"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${total_price_convert}</arg>
+<arg>${total_amount}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20230804 17:44:50.786" endtime="20230804 17:44:50.786"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:45.046" endtime="20230804 17:44:50.786"/>
+</kw>
+<kw name="Take Screenshot" library="Browser" type="TEARDOWN">
+<tag>PageContent</tag>
+<doc>Takes a screenshot of the current window or element and saves it to disk.</doc>
+<msg timestamp="20230804 17:44:50.916" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/robotframework-browser-screenshot-7.png" target="_blank"&gt;&lt;img src="browser/screenshot/robotframework-browser-screenshot-7.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20230804 17:44:50.787" endtime="20230804 17:44:50.916"/>
+</kw>
+<status status="PASS" starttime="20230804 17:44:36.826" endtime="20230804 17:44:50.916"/>
+</test>
+<status status="PASS" starttime="20230804 17:43:49.638" endtime="20230804 17:44:50.959"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="6" fail="0" skip="0" id="s1" name="First">First</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
